@@ -2,13 +2,13 @@
 <template>
   <div class="layout">
     <!-- 侧边栏 -->
-    <aside class="sidebar">
+    <aside class="sidebar" :style="{ width: isCollapsed ? '70px' : '200px' }">
       <div class="sidebar-header">
         <!-- 应用Logo -->
         <div class="logo">
           <h1>
             <el-icon class="logo-icon"><ChatDotRound /></el-icon>
-            <span class="logo-text">JoeyAI</span>
+            <span class="logo-text" v-show="!isCollapsed">JoeyAI</span>
           </h1>
         </div>
       </div>
@@ -19,37 +19,37 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link">
               <el-icon class="nav-icon"><HomeFilled /></el-icon>
-              <span class="nav-text">首页</span>
+              <span class="nav-text" v-show="!isCollapsed">首页</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/chat" class="nav-link">
               <el-icon class="nav-icon"><ChatLineRound /></el-icon>
-              <span class="nav-text">聊天</span>
+              <span class="nav-text" v-show="!isCollapsed">聊天</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/text-to-image" class="nav-link">
               <el-icon class="nav-icon"><Picture /></el-icon>
-              <span class="nav-text">文生图</span>
+              <span class="nav-text" v-show="!isCollapsed">文生图</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/image-to-image" class="nav-link">
               <el-icon class="nav-icon"><Sunny /></el-icon>
-              <span class="nav-text">图生图</span>
+              <span class="nav-text" v-show="!isCollapsed">图生图</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/generate-video" class="nav-link">
               <el-icon class="nav-icon"><VideoCamera /></el-icon>
-              <span class="nav-text">视频生成</span>
+              <span class="nav-text" v-show="!isCollapsed">视频生成</span>
             </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/xiaohongshu" class="nav-link">
               <el-icon class="nav-icon"><Notebook /></el-icon>
-              <span class="nav-text">小红书</span>
+              <span class="nav-text" v-show="!isCollapsed">小红书</span>
             </router-link>
           </li>
         </ul>
@@ -57,10 +57,21 @@
     </aside>
 
     <!-- 主容器，包含顶部工具条、主要内容和底部 -->
-    <div class="main-container">
+    <div
+      class="main-container"
+      :style="{ width: `calc(100% - ${isCollapsed ? '70px' : '250px'})` }"
+    >
       <!-- 顶部工具条 -->
-      <header class="top-header">
+      <header
+        class="top-header"
+        :style="{ paddingLeft: `${isCollapsed ? '0px' : '0px'}` }"
+      >
         <div class="header-content">
+          <!-- 伸缩按钮 -->
+          <button class="toggle-btn" @click="toggleSidebar">
+            <el-icon v-if="isCollapsed"><Expand /></el-icon>
+            <el-icon v-else><Fold /></el-icon>
+          </button>
           <!-- 主题选择器 -->
           <el-select
             v-model="currentThemeId"
@@ -81,9 +92,6 @@
               </div>
             </el-option>
           </el-select>
-          <div class="header-right">
-            <!-- 可以在这里添加其他顶部功能 -->
-          </div>
         </div>
       </header>
 
@@ -118,8 +126,10 @@ import {
   VideoCamera,
   Sunny,
   Notebook,
-  ChatDotRound
-} from '@element-plus/icons-vue';
+  ChatDotRound,
+  Fold,
+  Expand,
+} from "@element-plus/icons-vue";
 
 // 获取主题状态管理实例
 const themeStore = useThemeStore();
@@ -128,6 +138,9 @@ const { currentTheme, getAllThemes: allThemes } = storeToRefs(themeStore);
 
 // 当前选中的主题ID
 const currentThemeId = ref(themeStore.currentTheme);
+
+// 侧边栏折叠状态
+const isCollapsed = ref(false);
 
 // 组件挂载时初始化主题
 onMounted(() => {
@@ -139,6 +152,11 @@ onMounted(() => {
 const handleThemeChange = (themeId: string) => {
   themeStore.setTheme(themeId);
   currentThemeId.value = themeId;
+};
+
+// 切换侧边栏折叠状态
+const toggleSidebar = () => {
+  isCollapsed.value = !isCollapsed.value;
 };
 </script>
 
@@ -195,6 +213,23 @@ const handleThemeChange = (themeId: string) => {
   flex: 1;
 }
 
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-color, #303133);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .nav-list {
   list-style: none;
   margin: 20px 0;
@@ -215,7 +250,7 @@ const handleThemeChange = (themeId: string) => {
   align-items: center;
   gap: 12px;
   transition: background-color 0.3s ease;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .nav-link:hover,
@@ -224,8 +259,8 @@ const handleThemeChange = (themeId: string) => {
 }
 
 .nav-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -254,7 +289,7 @@ const handleThemeChange = (themeId: string) => {
 
 .header-content {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 15px 0 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -304,7 +339,7 @@ const handleThemeChange = (themeId: string) => {
 .footer {
   background: var(--card-color, #f8f9fa);
   border-top: 1px solid #dee2e6;
-  padding: 20px 0;
+  padding: 5px 0;
   margin-top: auto;
   width: 100%;
 }
@@ -312,7 +347,7 @@ const handleThemeChange = (themeId: string) => {
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
