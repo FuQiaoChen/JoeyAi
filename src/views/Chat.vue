@@ -119,8 +119,8 @@ onMounted(() => {
 
 <style scoped>
 .chat-container {
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -146,7 +146,7 @@ onMounted(() => {
 .chat-content {
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: calc(100% - 80px); /* 减去标题和边距的空间 */
   box-sizing: border-box;
 }
 

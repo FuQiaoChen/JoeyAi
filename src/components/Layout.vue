@@ -51,11 +51,11 @@
             <el-option
               v-for="theme in allThemes"
               :key="theme.id"
-              :label="theme.name"
+              :label="'主题：' + theme.name"
               :value="theme.id"
             >
               <div class="theme-option">
-                <span>{{ theme.name }}</span>
+                <span>主题：{{ theme.name }}</span>
                 <small class="theme-description">{{ theme.description }}</small>
               </div>
             </el-option>
@@ -115,11 +115,12 @@ const handleThemeChange = (themeId: string) => {
 <style scoped>
 .layout {
   min-height: 100vh;
+  height: 100vh; /* 固定高度 */
   display: flex;
   flex-direction: row;
   background-color: var(--background-color, #f5f7fa);
   color: var(--text-color, #303133);
-  overflow-x: hidden; /* 防止水平滚动条 */
+  overflow: hidden; /* 防止滚动条 */
 }
 
 .sidebar {
@@ -181,9 +182,9 @@ const handleThemeChange = (themeId: string) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh; /* 固定高度 */
   width: calc(100% - 250px); /* 减去侧边栏宽度 */
-  overflow-x: hidden; /* 防止水平滚动条 */
+  overflow: hidden; /* 防止滚动条 */
 }
 
 .top-header {
@@ -223,8 +224,18 @@ const handleThemeChange = (themeId: string) => {
   padding: 20px;
   background-color: var(--background-color, #f5f7fa);
   color: var(--text-color, #303133);
-  min-height: calc(100vh - 140px);
-  overflow-x: hidden; /* 防止水平滚动条 */
+  overflow: auto; /* 允许内容滚动 */
+  box-sizing: border-box; /* 确保padding不会增加元素的总尺寸 */
+}
+
+/* 隐藏滚动条但保持滚动功能 */
+.main-content::-webkit-scrollbar {
+  display: none; /* 隐藏Chrome滚动条 */
+}
+
+.main-content {
+  -ms-overflow-style: none; /* 隐藏IE和Edge滚动条 */
+  scrollbar-width: none; /* 隐藏Firefox滚动条 */
 }
 
 .header-right {

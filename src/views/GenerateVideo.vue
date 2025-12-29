@@ -237,8 +237,8 @@ const likeVideo = (video: GeneratedVideo) => {
 
 <style scoped>
 .generate-video-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -265,6 +265,7 @@ const likeVideo = (video: GeneratedVideo) => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  height: calc(100% - 80px); /* 减去标题和边距的空间 */
   box-sizing: border-box;
 }
 
