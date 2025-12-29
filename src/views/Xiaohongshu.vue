@@ -206,6 +206,7 @@ const regenerateContent = () => {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .xiaohongshu-card {
@@ -307,25 +308,75 @@ const regenerateContent = () => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 平板设备响应式设计 */
+@media (max-width: 1024px) {
+  .xiaohongshu-container {
+    max-width: 95%;
+  }
+}
+
+/* 移动设备响应式设计 */
 @media (max-width: 768px) {
   .xiaohongshu-container {
     padding: 10px;
   }
-  
+
   .xiaohongshu-form {
     padding: 0 10px;
   }
-  
+
   .length-slider {
     width: 100%;
   }
-  
+
   .action-buttons {
     flex-direction: column;
   }
-  
+
   .action-buttons .el-button {
     min-width: auto;
+  }
+
+  .content-result {
+    max-height: 350px;
+  }
+}
+
+/* 小屏移动设备响应式设计 */
+@media (max-width: 480px) {
+  .xiaohongshu-container {
+    padding: 10px 5px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .xiaohongshu-form {
+    padding: 0 5px;
+  }
+
+  .length-text {
+    font-size: 0.8rem;
+  }
+
+  .content-result {
+    padding: 15px;
+    max-height: 300px;
+  }
+
+  .content-paragraph {
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .generate-btn {
+    font-size: 1rem;
+    padding: 12px 15px;
   }
 }
 </style>

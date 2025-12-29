@@ -240,6 +240,7 @@ const likeVideo = (video: GeneratedVideo) => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .generate-video-card {
@@ -264,6 +265,7 @@ const likeVideo = (video: GeneratedVideo) => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  box-sizing: border-box;
 }
 
 .input-section {
@@ -393,16 +395,17 @@ const likeVideo = (video: GeneratedVideo) => {
   text-align: center;
 }
 
+/* 平板设备响应式设计 */
 @media (max-width: 1024px) {
   .content-wrapper {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .input-section {
     padding-right: 0;
   }
-  
+
   .result-section {
     padding-left: 0;
     border-left: none;
@@ -411,21 +414,61 @@ const likeVideo = (video: GeneratedVideo) => {
   }
 }
 
+/* 移动设备响应式设计 */
 @media (max-width: 768px) {
   .generate-video-container {
     padding: 10px;
   }
-  
+
   .video-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
   }
-  
+
   .duration-slider {
     width: 100%;
   }
-  
+
   .video-stats {
     justify-content: center;
+    gap: 10px;
+  }
+
+  .stat-item {
+    font-size: 0.8rem;
+  }
+}
+
+/* 小屏移动设备响应式设计 */
+@media (max-width: 480px) {
+  .generate-video-container {
+    padding: 10px 5px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .video-placeholder {
+    height: 160px;
+  }
+
+  .video-icon {
+    font-size: 40px;
+  }
+
+  .video-description {
+    font-size: 0.85rem;
+  }
+
+  .generate-btn {
+    font-size: 1rem;
+    padding: 12px 15px;
   }
 }
 </style>

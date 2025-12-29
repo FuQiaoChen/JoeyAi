@@ -17,7 +17,7 @@ export interface Theme {
 export const useThemeStore = defineStore('theme', {
   state: () => ({
     // 当前主题ID
-    currentTheme: 'default',
+    currentTheme: 'dark',
     // 所有可用主题
     themes: {
       default: {
@@ -29,6 +29,16 @@ export const useThemeStore = defineStore('theme', {
         backgroundColor: '#f5f7fa',
         textColor: '#303133',
         cardColor: '#ffffff',
+      },
+      dark: {
+        id: 'dark',
+        name: '深色',
+        description: '深色主题，保护眼睛，适合夜间使用',
+        primaryColor: '#4a90e2',
+        secondaryColor: '#5dade2',
+        backgroundColor: '#1a1a1a',
+        textColor: '#e0e0e0',
+        cardColor: '#2d2d2d',
       },
       pink: {
         id: 'pink',
@@ -86,7 +96,7 @@ export const useThemeStore = defineStore('theme', {
   getters: {
     // 获取当前主题对象
     getCurrentTheme(): Theme {
-      return this.themes[this.currentTheme] || this.themes.default
+      return this.themes[this.currentTheme] || this.themes.dark
     },
     // 获取所有主题列表
     getAllThemes(): Theme[] {
@@ -122,6 +132,9 @@ export const useThemeStore = defineStore('theme', {
       const savedTheme = localStorage.getItem('joeyai-theme')
       if (savedTheme && this.themes[savedTheme]) {
         this.currentTheme = savedTheme
+      } else {
+        // 如果没有保存的主题或保存的主题不存在，则使用深色主题作为默认
+        this.currentTheme = 'dark'
       }
       this.applyTheme()
     },

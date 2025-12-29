@@ -198,6 +198,7 @@ const shareImage = (image: GeneratedImage) => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .text-to-image-card {
@@ -222,6 +223,7 @@ const shareImage = (image: GeneratedImage) => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  box-sizing: border-box;
 }
 
 .input-section {
@@ -320,16 +322,17 @@ const shareImage = (image: GeneratedImage) => {
   text-align: center;
 }
 
+/* 平板设备响应式设计 */
 @media (max-width: 1024px) {
   .content-wrapper {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .input-section {
     padding-right: 0;
   }
-  
+
   .result-section {
     padding-left: 0;
     border-left: none;
@@ -338,17 +341,60 @@ const shareImage = (image: GeneratedImage) => {
   }
 }
 
+/* 移动设备响应式设计 */
 @media (max-width: 768px) {
   .text-to-image-container {
     padding: 10px;
   }
-  
-  .image-grid {
-    grid-template-columns: 1fr;
+
+  .content-wrapper {
+    gap: 20px;
   }
-  
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
   .count-slider {
     width: 100%;
+  }
+
+  .image-container {
+    height: 180px;
+  }
+}
+
+/* 小屏移动设备响应式设计 */
+@media (max-width: 480px) {
+  .text-to-image-container {
+    padding: 10px 5px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .content-wrapper {
+    gap: 15px;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .image-container {
+    height: 160px;
+  }
+
+  .image-actions {
+    justify-content: center;
+  }
+
+  .generate-btn {
+    font-size: 1rem;
+    padding: 12px 15px;
   }
 }
 </style>

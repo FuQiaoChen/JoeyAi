@@ -31,6 +31,9 @@ onMounted(() => {
   min-height: 100vh;
   background-color: var(--background-color, #f5f7fa);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden; /* 防止水平滚动条 */
+  margin: 0;
+  padding: 0;
 }
 
 /* Global animations */

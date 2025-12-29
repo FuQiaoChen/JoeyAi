@@ -122,6 +122,7 @@ onMounted(() => {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .chat-card {
@@ -146,6 +147,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 600px;
+  box-sizing: border-box;
 }
 
 .messages-container {
@@ -158,6 +160,7 @@ onMounted(() => {
   background-color: #f8f9fa;
   border-radius: 8px;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .message {
@@ -165,6 +168,7 @@ onMounted(() => {
   gap: 12px;
   max-width: 80%;
   animation: fadeIn 0.3s ease;
+  box-sizing: border-box;
 }
 
 .message.user-message {
@@ -208,6 +212,7 @@ onMounted(() => {
 
 .input-section {
   padding: 0 20px 20px;
+  box-sizing: border-box;
 }
 
 .message-input {
@@ -230,22 +235,77 @@ onMounted(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* 平板设备响应式设计 */
+@media (max-width: 1024px) {
+  .chat-content {
+    height: 550px;
+  }
+}
+
+/* 移动设备响应式设计 */
 @media (max-width: 768px) {
   .chat-container {
     padding: 10px;
+    max-width: 100%;
   }
-  
+
   .chat-content {
-    height: auto;
-    min-height: 500px;
+    height: calc(100vh - 200px);
+    min-height: 400px;
   }
-  
+
+  .messages-container {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
   .message {
     max-width: 90%;
+    gap: 8px;
   }
-  
+
+  .message-bubble {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
   .input-section {
     padding: 0 10px 10px;
+  }
+}
+
+/* 小屏移动设备响应式设计 */
+@media (max-width: 480px) {
+  .chat-container {
+    padding: 5px;
+  }
+
+  .chat-content {
+    height: calc(100vh - 180px);
+    min-height: 350px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .messages-container {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .message {
+    max-width: 95%;
+    gap: 6px;
+  }
+
+  .message-bubble {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .message-time {
+    font-size: 0.7rem;
   }
 }
 </style>
