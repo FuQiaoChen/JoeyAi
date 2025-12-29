@@ -6,7 +6,10 @@
       <div class="sidebar-header">
         <!-- 应用Logo -->
         <div class="logo">
-          <h1>JoeyAI</h1>
+          <h1>
+            <el-icon class="logo-icon"><ChatDotRound /></el-icon>
+            <span class="logo-text">JoeyAI</span>
+          </h1>
         </div>
       </div>
 
@@ -14,22 +17,40 @@
       <nav class="nav">
         <ul class="nav-list">
           <li class="nav-item">
-            <router-link to="/" class="nav-link">首页</router-link>
+            <router-link to="/" class="nav-link">
+              <el-icon class="nav-icon"><HomeFilled /></el-icon>
+              <span class="nav-text">首页</span>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/chat" class="nav-link">聊天</router-link>
+            <router-link to="/chat" class="nav-link">
+              <el-icon class="nav-icon"><ChatLineRound /></el-icon>
+              <span class="nav-text">聊天</span>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/text-to-image" class="nav-link">文生图</router-link>
+            <router-link to="/text-to-image" class="nav-link">
+              <el-icon class="nav-icon"><Picture /></el-icon>
+              <span class="nav-text">文生图</span>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/image-to-image" class="nav-link">图生图</router-link>
+            <router-link to="/image-to-image" class="nav-link">
+              <el-icon class="nav-icon"><Sunny /></el-icon>
+              <span class="nav-text">图生图</span>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/generate-video" class="nav-link">视频生成</router-link>
+            <router-link to="/generate-video" class="nav-link">
+              <el-icon class="nav-icon"><VideoCamera /></el-icon>
+              <span class="nav-text">视频生成</span>
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/xiaohongshu" class="nav-link">小红书</router-link>
+            <router-link to="/xiaohongshu" class="nav-link">
+              <el-icon class="nav-icon"><Notebook /></el-icon>
+              <span class="nav-text">小红书</span>
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -90,6 +111,15 @@
 import { ref, onMounted } from "vue";
 import { useThemeStore } from "@/stores/theme";
 import { storeToRefs } from "pinia";
+import {
+  HomeFilled,
+  ChatLineRound,
+  Picture,
+  VideoCamera,
+  Sunny,
+  Notebook,
+  ChatDotRound
+} from '@element-plus/icons-vue';
 
 // 获取主题状态管理实例
 const themeStore = useThemeStore();
@@ -150,6 +180,19 @@ const handleThemeChange = (themeId: string) => {
   font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.logo-text {
+  flex: 1;
 }
 
 .nav-list {
@@ -168,7 +211,9 @@ const handleThemeChange = (themeId: string) => {
   text-decoration: none;
   padding: 12px 15px;
   border-radius: 8px;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   transition: background-color 0.3s ease;
   font-size: 1rem;
 }
@@ -176,6 +221,18 @@ const handleThemeChange = (themeId: string) => {
 .nav-link:hover,
 .nav-link.router-link-active {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-text {
+  flex: 1;
 }
 
 .main-container {
